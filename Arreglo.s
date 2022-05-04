@@ -42,29 +42,32 @@ cantidad_Manzana: .word 35
 precio_Manzana: .word 19
 cantidad_Solicitada_Manzana: .word 0
 
-nombre: .asciz ""
-op: .word 0
+nombre: .asciz "                   "
+op: .byte ' '
 cantidad: .word 0
 total: .word 0
 
-formatoNum:	.asciz "%d "
-formatoC:	.asciz "%c "
+formatoNum:	.asciz "%d"
+formatoC:	.asciz "%c"
+formatoS:	.asciz " %s"
 formatoNombre: .asciz "Ingrese su nombre: "
 formatoError: .asciz "Ha ocurrido un error"
 formatoIngreso: .asciz "Ingrese el numero del alimento que desea comprar: "
 formatoAlimento: .asciz "Ingrese la cantidad de producto que desea: "
 formatoMenu: .asciz "Menu: \n1. Leche\n2. P. Galletas\n3. Mantequilla\n4. Queso\n5. Uni. Pan\n6. Jalea \n7. Uni. Yogurt\n8. Lb. Manzana\n9. Salir"
-formatoSalida1: .asciz "Nombre del cliente: %c"
-formatoSalida2: .asciz "Producto		Precio		Cantidad		SubTotal"
+
+
+formatoSalida1: .asciz "Nombre del cliente: %s \n"
+formatoSalida2: .asciz "Producto		Precio		Cantidad		SubTotal\n"
 formatoLeche: .asciz "Leche				Q.18			%d				"
-formatoGalleta: .asciz "Galletas				Q.25			%d				"
-formatoMantequilla: .asciz "Mantequilla				Q.10		%d				"
-formatoQueso: .asciz "Queso				Q.35			%d				"
-formatoPan: .asciz "Pan				Q.4			%d				"
-formatoJalea: .asciz "Jalea			Q.26		%d				"
-formatoYogurt: .asciz "Yogurt				Q.8			%d				"
-formatoManzana: .asciz "Manzana				Q.19			%d				"
-formatoTotal: .asciz "															Total a pagar: %d"
+formatoGalleta: .asciz "\nGalletas				Q.25			%d				"
+formatoMantequilla: .asciz "\nMantequilla				Q.10		%d				"
+formatoQueso: .asciz "\nQueso				Q.35			%d				"
+formatoPan: .asciz "\nPan				Q.4			%d				"
+formatoJalea: .asciz "\nJalea			Q.26		%d				"
+formatoYogurt: .asciz "\nYogurt				Q.8			%d				"
+formatoManzana: .asciz "\nManzana				Q.19			%d				"
+formatoTotal: .asciz "\n															Total a pagar: %d"
 
 .text
 .align 2
@@ -76,22 +79,24 @@ main:
 	ldr r0, =formatoNombre
 	bl puts
 
-	ldr r0, =formatoC
+	ldr r0, =formatoS
 	ldr r1, =nombre
 	bl scanf
+	
 
+	
 menu:
 	ldr r0, =formatoMenu
 	bl puts
 
 	ldr r0,=formatoIngreso
 	bl puts
-
+	
 	ldr r0, =formatoNum
 	ldr r1, =op
 	bl scanf
 	
-	ldr r4,=op
+	ldr r4, =op
 	ldr r4,[r4]
 	cmp r4,#1
 	beq opLeche
@@ -135,34 +140,48 @@ menu:
 	ldr r4,[r4]
 	cmp r4,#9
 	beq salir
-
+	
 
 
 opLeche:
 	ldr r0, =formatoAlimento
-	bl puts	
+	bl puts
 
 	ldr r0, =formatoNum
 	ldr r1, =cantidad
 	bl scanf
+	
+	ldr r0, =formatoNum
+	ldr r1, =cantidad
+	ldr r1, [r1]
+	bl printf
 
 	ldr r5, =cantidad_Leche
-
-	cmp r1,r5
-	blt Error
-
+	ldr r5, [r5]
 	ldr r1, =cantidad
+	ldr r1, [r1]
+	
+	cmp r5, r1
+	blt Error
+	
+	sub r5, r1
+	
+	ldr r1, =cantidad
+	ldr r1, [r1]
 	ldr r7, =precio_Leche
+	ldr r7, [r7]
 	ldr r6, =cantidad_Solicitada_Leche
-	mul r6, r1, r7
+	ldr r6, [r6]
+	add r6, r1
+
 
 	b suma
 
 suma:
-
+	mul r10, r6, r7
 	ldr r12, =total
 	ldr r12,[r12]
-	add r12,r6
+	add r12,r10
 
 	b menu
 
@@ -176,18 +195,13 @@ opGalleta:
 
 	ldr r5, =cantidad_Galletas
 
-	cmp r1,r5
+	cmp r5,r1
 	blt Error
 
 	ldr r1, =cantidad
 	ldr r7, =precio_Galletas
 	ldr r6, =cantidad_Solicitada_Galletas
 	mul r6, r1, r7
-
-	ldr r12, =total
-	ldr r12,[r12]
-	add r12,r6
-
 
 	b suma
 
@@ -201,7 +215,7 @@ opMantequilla:
 
 	ldr r5, =cantidad_Mantequilla
 
-	cmp r1,r5
+	cmp r5,r1
 	blt Error
 
 	ldr r1, =cantidad
@@ -221,7 +235,7 @@ opQueso:
 
 	ldr r5, =cantidad_Queso
 
-	cmp r1,r5
+	cmp r5,r1
 	blt Error
 
 	ldr r1, =cantidad
@@ -242,7 +256,7 @@ opPan:
 
 	ldr r5, =cantidad_Pan
 
-	cmp r1,r5
+	cmp r5,r1
 	blt Error
 
 	ldr r1, =cantidad
@@ -262,7 +276,7 @@ opJalea:
 
 	ldr r5, =cantidad_Jalea
 
-	cmp r1,r5
+	cmp r5,r1
 	blt Error
 
 	ldr r1, =cantidad
@@ -282,7 +296,7 @@ opYogurt:
 
 	ldr r5, =cantidad_Yogurt
 
-	cmp r1,r5
+	cmp r5,r1
 	blt Error
 
 	ldr r1, =cantidad
@@ -303,7 +317,7 @@ opManzana:
 
 	ldr r5, =cantidad_Manzana
 
-	cmp r1,r5
+	cmp r5,r1
 	blt Error
 
 	ldr r1, =cantidad
@@ -333,11 +347,12 @@ salir:
 	@@ Ciclo de Leche
 	ldr r0, =formatoLeche
 	ldr r1, =cantidad_Solicitada_Leche
-	
+	ldr r1, [r1]
 	bl printf
 
 	ldr r0, =formatoNum
 	ldr r2, =precio_Leche
+	ldr r2, [r2]
 	mul r1, r1, r2
 	bl printf
 
