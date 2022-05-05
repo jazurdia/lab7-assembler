@@ -107,8 +107,6 @@ main:
     bne comparador2
     str r3, =ultimaLetraApellido
     bx lr
-
-
     
     comparador3: @@ encuentra la cantidad de vocales en Nombre
     ldr r2, =name
@@ -137,6 +135,10 @@ main:
     addeq r5, r5, #1
     cmp r3, #' '
     bne comparador3
+
+    str r3, =letrasnombre
+
+
     bx lr
 
     comparador4: @@ encuentra la cantidad de vocales en Apellido
