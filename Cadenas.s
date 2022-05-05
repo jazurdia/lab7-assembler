@@ -116,10 +116,6 @@ main:
     
     bx lr
 
-
-
-
-
     comparador2: @@ encuentra la cantidad de letras en Apellido
     ldr r2, =lastname
     ldr r3, =letrasapellido
@@ -145,7 +141,7 @@ main:
 
     @@add r2, r2, r3
     
-    ldrb r3, [r2]
+    ldrb r3, [r2, #4]
     cmp r3, #'a'
     addeq r5, r5, #1 @@ si es vocal
     cmp r3, #'e'
@@ -185,7 +181,7 @@ main:
     ldr r3, [r3] @@ contador de vocales en nombre
 
     @@add r2, r2, r3
-    ldrb r3, [r2]
+    ldrb r3, [r2, #4]
     cmp r3, #'a'
     addeq r9, r9, #1
     cmp r3, #'e'
@@ -210,8 +206,6 @@ main:
     add r3, r3, #4
     bne comparador4
 
-
-
     ldr r4, =vocalesapellido
     str r3, [r4]
 
@@ -224,12 +218,18 @@ puntuador:
     ldr r5, =vocalesnombre
     ldr r6, =vocalesapellido
 
+    ldr r8, =ultimaLetraNombre
+    ldr r9, =ultimaLetraApellido
+
     mov r7, #0 @@ contador de puntuacion
 
     cmp r3, r4
     addeq r7, r7, #1 @@ si son iguales
 
     cmp r5, r6
+    addeq r7, r7, #1 @@ si son iguales
+
+    cmp r8, r9
     addeq r7, r7, #1 @@ si son iguales
 
     bx lr
