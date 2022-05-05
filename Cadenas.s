@@ -11,6 +11,8 @@
 
 name: .asciiz "Nombre"
 lastname: .asciiz "Apellido"
+ultimaLetraNombre: .asciiz "a"
+ultimaLetraApellido: .asciiz "a"
 
 formatoN: .asciiz "%s"
 formato2: .asciiz "%d"
@@ -63,16 +65,16 @@ main:
     mov r5, #0 @@vocales en nombre
     mov r9, #0 @@vocales en apellido
 
-    b comparador1
+    bl comparador1
     str r3, =letrasnombre
 
-    b comparador2
+    bl comparador2
     str r3, =letrasapellido
 
-    b comparador3
+    bl comparador3
     str r5, =vocalesnombre
 
-    b comparador4
+    bl comparador4
     str r9, =vocalesapellido 
     
     ldr r0, =msj_puntuacion
@@ -88,11 +90,13 @@ main:
 
     comparador1: @@ encuentra la cantidad de letras en Nombre
     ldr r2, =name
-    ldr r3, =letrasnombre
-    add r2, r2, r3
+    ldr r3, =letrasnombre @@ contador de letras en nombre
+    add r2, r2, r3 
     ldrb r3, [r2]
     cmp r3, #0
     bne comparador1
+    str r3, =ultimaLetraNombre
+    bx lr
 
     comparador2: @@ encuentra la cantidad de letras en Apellido
     ldr r2, =lastname
@@ -101,6 +105,9 @@ main:
     ldrb r3, [r2]
     cmp r3, #0
     bne comparador2
+    str r3, =ultimaLetraApellido
+    bx lr
+
 
     
     comparador3: @@ encuentra la cantidad de vocales en Nombre
@@ -130,6 +137,7 @@ main:
     addeq r5, r5, #1
     cmp r3, #' '
     bne comparador3
+    bx lr
 
     comparador4: @@ encuentra la cantidad de vocales en Apellido
     ldr r2, =lastname
@@ -158,6 +166,7 @@ main:
     addeq r9, r9, #1
     cmp r3, #' '
     bne comparador4
+    bx lr
 
 puntuador:
     ldr r3, =letrasnombre
