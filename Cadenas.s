@@ -9,8 +9,8 @@
 .data
 .align 2
 
-name: .asciiz "Nombre"
-lastname: .asciiz "Apellido"
+name: .asciz "Nombre"
+lastname: .asciz "Apellido"
 ultimaLetraNombre: .asciz "a"
 ultimaLetraApellido: .asciz "a"
 
@@ -26,11 +26,7 @@ letrasapellido: .word 0
 @@ mensajes
 msj_nombre: .asciz "Ingresa el nombre de bebe: "
 msj_apellido: .asciz "Ingresa el apellido de bebe: "   
-
 msj_puntuacion: .asciz "Puntuacion: "
-
-
-
 
 .text
 .align 2
