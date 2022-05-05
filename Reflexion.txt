@@ -1,0 +1,9 @@
+Alejandro Azurdia: 
+En este laboratorio aprendí como funcionan los hexadecimales en assembler, además de terminar de entender las subrutinas. 
+Corregí errores que se cometieron en los programas anteriores y aprendí mucho.
+
+El reto más grande al que me enfrente fue la comparación de un byte a un hexadecimal en una cadena de texto. Una vez que logré
+realizar esto, fue más fácil hacer lo demas. 
+
+Daniel Cabrera:
+
