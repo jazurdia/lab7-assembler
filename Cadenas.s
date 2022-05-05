@@ -13,6 +13,7 @@ name: .asciiz "Nombre"
 lastname: .asciiz "Apellido"
 
 formatoN: .asciiz "%s"
+formato2: .asciiz "%d"
 
 vocalesnombre: .word 0
 vocalesapellido: .word 0
@@ -23,10 +24,10 @@ letrasapellido: .word 0
 @@ mensajes
 msj_nombre: .asciiz "Ingresa el nombre de bebe: "
 msj_apellido: .asciiz "Ingresa el apellido de bebe: "
-msj_leyendo_nombre: .asciiz "leyendo nombre"
-msj_leyendo_apellido: .asciiz "leyendo apellido"
-msj_num_nom: .asciiz "El nombre tiene esta cantidad de caracteres: "
-msj_num_ape: .asciiz "El apellido tiene esta cantidad de caracteres: "
+
+msj_puntuacion : .asciiz "Puntuacion: "
+
+
 
 
 .text
@@ -60,14 +61,28 @@ main:
 
     @@ contadores:
     mov r5, #0 @@vocales en nombre
-    mov r6, #0 @@letras en nombre
     mov r9, #0 @@vocales en apellido
-    mov r10, #0 @@letras en apellido
 
+    b comparador1
+    str r3, =letrasnombre
+
+    b comparador2
+    str r3, =letrasapellido
+
+    b comparador3
+    str r5, =vocalesnombre
+
+    b comparador4
+    str r9, =vocalesapellido
+
+    b comparador5
     
+    ldr r0, =msj_puntuacion
+    bl puts
 
-
-
+    ldr r0, =formato2
+    ldr r1, =puntuacion
+    bl printf
 
 
     comparador1: @@ encuentra la cantidad de letras en Nombre
@@ -77,7 +92,6 @@ main:
     ldrb r3, [r2]
     cmp r3, #0
     bne comparador1
-    b main
 
     comparador2: @@ encuentra la cantidad de letras en Apellido
     ldr r2, =lastname
@@ -86,15 +100,15 @@ main:
     ldrb r3, [r2]
     cmp r3, #0
     bne comparador2
-    b main
 
+    
     comparador3: @@ encuentra la cantidad de vocales en Nombre
     ldr r2, =name
     ldr r3, =vocalesnombre
     add r2, r2, r3
     ldrb r3, [r2]
     cmp r3, #'a'
-    addeq r5, r5, #1
+    addeq r5, r5, #1 @@ si es vocal
     cmp r3, #'e'
     addeq r5, r5, #1
     cmp r3, #'i'
@@ -115,7 +129,6 @@ main:
     addeq r5, r5, #1
     cmp r3, #' '
     bne comparador3
-    b main
 
     comparador4: @@ encuentra la cantidad de vocales en Apellido
     ldr r2, =lastname
@@ -144,7 +157,22 @@ main:
     addeq r9, r9, #1
     cmp r3, #' '
     bne comparador4
-    b main
+
+puntuador:
+    ldr r3, =letrasnombre
+    ldr r4, =letrasapellido
+    ldr r5, =vocalesnombre
+    ldr r6, =vocalesapellido
+
+    mov r7, #0 @@ contador de puntuacion
+
+    cmp r3, r4
+    addeq r7, r7, #1 @@ si son iguales
+
+    cmp r5, r6
+    addeq r7, r7, #1 @@ si son iguales
+
+    bx lr
 
 
 
