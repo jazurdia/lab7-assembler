@@ -136,7 +136,7 @@ main:
     cmp r3, #' '
     bne comparador3
 
-    str r3, =letrasnombre
+    
 
 
     bx lr
