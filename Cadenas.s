@@ -10,11 +10,15 @@
 .align 2
 
 name: .asciiz "Nombre"
-name_lenght: .word 0
 lastname: .asciiz "Apellido"
-lastname_lenght: .word 12
 
 formatoN: .asciiz "%s"
+
+vocalesnombre: .word 0
+vocalesapellido: .word 0
+letrasnombre: .word 0
+letrasapellido: .word 0
+
 
 @@ mensajes
 msj_nombre: .asciiz "Ingresa el nombre de bebe: "
@@ -60,25 +64,33 @@ main:
     mov r9, #0 @@vocales en apellido
     mov r10, #0 @@letras en apellido
 
+    
+
+
+
+
+
     comparador1: @@ encuentra la cantidad de letras en Nombre
     ldr r2, =name
-    ldr r3, =name_lenght
+    ldr r3, =letrasnombre
     add r2, r2, r3
     ldrb r3, [r2]
     cmp r3, #0
     bne comparador1
+    b main
 
     comparador2: @@ encuentra la cantidad de letras en Apellido
     ldr r2, =lastname
-    ldr r3, =lastname_lenght
+    ldr r3, =letrasapellido
     add r2, r2, r3
     ldrb r3, [r2]
     cmp r3, #0
     bne comparador2
+    b main
 
     comparador3: @@ encuentra la cantidad de vocales en Nombre
     ldr r2, =name
-    ldr r3, =name_lenght
+    ldr r3, =vocalesnombre
     add r2, r2, r3
     ldrb r3, [r2]
     cmp r3, #'a'
@@ -103,10 +115,11 @@ main:
     addeq r5, r5, #1
     cmp r3, #' '
     bne comparador3
+    b main
 
     comparador4: @@ encuentra la cantidad de vocales en Apellido
     ldr r2, =lastname
-    ldr r3, =lastname_lenght
+    ldr r3, =vocalesapellido
     add r2, r2, r3
     ldrb r3, [r2]
     cmp r3, #'a'
@@ -131,6 +144,7 @@ main:
     addeq r9, r9, #1
     cmp r3, #' '
     bne comparador4
+    b main
 
 
 
