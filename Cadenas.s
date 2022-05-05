@@ -87,7 +87,7 @@ main:
     add r3, r3, #1
 
     ldrb r4, [r2, #4]
-    cmp r4, #'Z'
+    cmp r4, #0x00
     bne comparadorv2_1
 
     ldr r5, =letrasnombre
@@ -104,7 +104,7 @@ main:
     add r3, r3, #1
 
     ldrb r4, [r2, #4]
-    cmp r4, #'Z'
+    cmp r4, #0x00
     bne comparadorv2_1
 
     ldr r5, =letrasapellido
@@ -121,29 +121,29 @@ main:
     @@add r2, r2, r3
     
     ldrb r3, [r2, #4]
-    cmp r3, #'a'
+    cmp r3, #0x61
     addeq r5, r5, #1 @@ si es vocal
-    cmp r3, #'e'
+    cmp r3, #0x65
     addeq r5, r5, #1
-    cmp r3, #'i'
+    cmp r3, #0x69
     addeq r5, r5, #1
-    cmp r3, #'o'
+    cmp r3, #0x6F
     addeq r5, r5, #1
-    cmp r3, #'u'
+    cmp r3, #0x75
     addeq r5, r5, #1
-    cmp r3, #'A'
+    cmp r3, #0x79
     addeq r5, r5, #1
-    cmp r3, #'E'
+    cmp r3, #0x7A
     addeq r5, r5, #1
-    cmp r3, #'I'
+    cmp r3, #0x41
     addeq r5, r5, #1
-    cmp r3, #'O'
+    cmp r3, #0x45
     addeq r5, r5, #1
-    cmp r3, #'U'
+    cmp r3, #0x49
     addeq r5, r5, #1
     
     add r3, r3, #4
-    cmp r3, #'Z'
+    cmp r3, #0x00
     bne comparador3
 
 
@@ -161,29 +161,29 @@ main:
 
     @@add r2, r2, r3
     ldrb r3, [r2, #4]
-    cmp r3, #'a'
+    cmp r3, #0x61
     addeq r9, r9, #1
-    cmp r3, #'e'
+    cmp r3, #0x65
     addeq r9, r9, #1
-    cmp r3, #'i'
+    cmp r3, #0x69
     addeq r9, r9, #1
-    cmp r3, #'o'
+    cmp r3, #0x6F
     addeq r9, r9, #1
-    cmp r3, #'u'
+    cmp r3, #0x75
     addeq r9, r9, #1
-    cmp r3, #'A'
+    cmp r3, #0x79
     addeq r9, r9, #1
-    cmp r3, #'E'
+    cmp r3, #0x7A
     addeq r9, r9, #1
-    cmp r3, #'I'
+    cmp r3, #0x41
     addeq r9, r9, #1
-    cmp r3, #'O'
+    cmp r3, #0x45
     addeq r9, r9, #1
-    cmp r3, #'U'
+    cmp r3, #0x49
     addeq r9, r9, #1
 
     add r3, r3, #4
-    cmp r3, #'Z'
+    cmp r3, #0x00
     bne comparador4
 
     ldr r4, =vocalesapellido
