@@ -23,9 +23,9 @@ letrasapellido: .word 0
 
 @@ mensajes
 msj_nombre: .asciiz "Ingresa el nombre de bebe: "
-msj_apellido: .asciiz "Ingresa el apellido de bebe: "
+msj_apellido: .asciiz "Ingresa el apellido de bebe: "   
 
-msj_puntuacion : .asciiz "Puntuacion: "
+msj_puntuacion: .asciiz "Puntuacion: "
 
 
 
@@ -73,9 +73,7 @@ main:
     str r5, =vocalesnombre
 
     b comparador4
-    str r9, =vocalesapellido
-
-    b comparador5
+    str r9, =vocalesapellido 
     
     ldr r0, =msj_puntuacion
     bl puts
@@ -83,6 +81,9 @@ main:
     ldr r0, =formato2
     ldr r1, =puntuacion
     bl printf
+
+    ldmfd sp!, {lr}
+    @@ salida
 
 
     comparador1: @@ encuentra la cantidad de letras en Nombre
