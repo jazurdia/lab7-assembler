@@ -26,7 +26,7 @@ letrasapellido: .word 0
 
 @@ mensajes
 msj_nombre: .asciz "Ingresa el nombre del bebe (AL finalizar el nombre pon Z mayúscula sin espacios): "
-msj_apellido: .asciz "Ingresa el apellido del bebe: (Al finalizar pon Z mayúscula sin espacios): ")"   
+msj_apellido: .asciz "Ingresa el apellido del bebe: (Al finalizar pon Z mayúscula sin espacios): "   
 msj_puntuacion: .asciz "Puntuacion: "
 
 .text
