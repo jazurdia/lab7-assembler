@@ -87,7 +87,7 @@ main:
     add r3, r3, #1
 
     ldrb r4, [r2, #4]
-    cmp r4, #"0"
+    cmp r4, #"Z"
     bne comparadorv2_1
 
     ldr r5, =letrasnombre
@@ -104,7 +104,7 @@ main:
     add r3, r3, #1
 
     ldrb r4, [r2, #4]
-    cmp r4, #"0"
+    cmp r4, #"Z
     bne comparadorv2_1
 
     ldr r5, =letrasapellido
@@ -143,7 +143,7 @@ main:
     addeq r5, r5, #1
     
     add r3, r3, #4
-    cmp r3, #"0"
+    cmp r3, #"Z
     bne comparador3
 
 
@@ -183,7 +183,7 @@ main:
     addeq r9, r9, #1
 
     add r3, r3, #4
-    cmp r3, #"0"
+    cmp r3, #"Z
     bne comparador4
 
     ldr r4, =vocalesapellido
