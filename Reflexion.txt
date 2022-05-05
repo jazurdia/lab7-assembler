@@ -6,4 +6,11 @@ El reto más grande al que me enfrente fue la comparación de un byte a un hexad
 realizar esto, fue más fácil hacer lo demas. 
 
 Daniel Cabrera:
+En este laboratorio aprendí bastante sobre la resolución de problemas. aprendí mucho sobre saltos, offset, hexadecimal y el valor 
+de tener paciencia cuando un problema no se esta solucionando tan rápido como quisiera.
 
+En mi caso el problemas más grande fue el poder corregir el scanf del segundo programa, ya que por alguna razón no estaba funcionando.
+Pero luego de probar varias opciones logré con la ayuda de Kimberly resolverlo, de ahí surgieron unos cuántos errores en cuánto al 
+uso de branches pero se solucionaron relativamente rápido.
+
+.
