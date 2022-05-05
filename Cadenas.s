@@ -13,6 +13,7 @@ name: .asciz "Nombre"
 lastname: .asciz "Apellido"
 ultimaLetraNombre: .asciz "a"
 ultimaLetraApellido: .asciz "a"
+puntuacion: .word 0
 
 formatoN: .asciz "%s"
 formato2: .asciz "%d"
@@ -47,7 +48,7 @@ main:
     mov r1, #0
     
     @@ leer apellido
-    ldr r0, =msj_leyendo_apellido
+    ldr r0, =msj_apellido
     bl puts
 
     ldr r0, =formatoN
@@ -66,12 +67,14 @@ main:
 
     bl comparador3
     bl comparador4
+
+    bl puntuador
     
     ldr r0, =msj_puntuacion
     bl puts
 
     ldr r0, =formato2
-    ldr r1, =puntuacion
+    ldr r1, [r7]
     bl printf
 
     ldmfd sp!, {lr}
@@ -192,7 +195,7 @@ main:
 
     bx lr
 
-puntuador:
+    puntuador: @@ encuentra la cantidad de puntos en Nombre
     ldr r3, =letrasnombre
     ldr r4, =letrasapellido
     ldr r5, =vocalesnombre
@@ -213,18 +216,3 @@ puntuador:
     addeq r7, r7, #1 @@ si son iguales
 
     bx lr
-
-
-
-
-
-
-
-
-
-
-    
-    
-
-
-
