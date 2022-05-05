@@ -44,7 +44,7 @@ main:
     bl puts
 
     ldr r0, =formatoN
-    ldr r1, =name_lenght
+    ldr r1, =name
     bl scanf
 
     mov r0, #0
@@ -55,7 +55,7 @@ main:
     bl puts
 
     ldr r0, =formatoN
-    ldr r1, =lastname_lenght
+    ldr r1, =lastname
     bl scanf
 
     mov r0, #0
