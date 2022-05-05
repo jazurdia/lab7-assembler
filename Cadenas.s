@@ -11,11 +11,11 @@
 
 name: .asciiz "Nombre"
 lastname: .asciiz "Apellido"
-ultimaLetraNombre: .asciiz "a"
-ultimaLetraApellido: .asciiz "a"
+ultimaLetraNombre: .asciz "a"
+ultimaLetraApellido: .asciz "a"
 
-formatoN: .asciiz "%s"
-formato2: .asciiz "%d"
+formatoN: .asciz "%s"
+formato2: .asciz "%d"
 
 vocalesnombre: .word 0
 vocalesapellido: .word 0
@@ -24,10 +24,10 @@ letrasapellido: .word 0
 
 
 @@ mensajes
-msj_nombre: .asciiz "Ingresa el nombre de bebe: "
-msj_apellido: .asciiz "Ingresa el apellido de bebe: "   
+msj_nombre: .asciz "Ingresa el nombre de bebe: "
+msj_apellido: .asciz "Ingresa el apellido de bebe: "   
 
-msj_puntuacion: .asciiz "Puntuacion: "
+msj_puntuacion: .asciz "Puntuacion: "
 
 
 
