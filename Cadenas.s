@@ -65,17 +65,11 @@ main:
     mov r5, #0 @@vocales en nombre
     mov r9, #0 @@vocales en apellido
 
-    bl comparador1
-    str r3, =letrasnombre
-
-    bl comparador2
-    str r3, =letrasapellido
+    bl comparadorv2_1
+    bl comparadorv2_2
 
     bl comparador3
-    str r5, =vocalesnombre
-
     bl comparador4
-    str r9, =vocalesapellido 
     
     ldr r0, =msj_puntuacion
     bl puts
@@ -88,15 +82,43 @@ main:
     @@ salida
 
 
-    comparador1: @@ encuentra la cantidad de letras en Nombre
+    comparadorv2_1: @@ encuentra la cantidad de letras en nombre
     ldr r2, =name
-    ldr r3, =letrasnombre @@ contador de letras en nombre
-    add r2, r2, r3 
-    ldrb r3, [r2]
-    cmp r3, #0
-    bne comparador1
-    str r3, =ultimaLetraNombre
+    ldr r2, [r2] @@ cadena de texto del nombre
+    ldr r3, =letrasnombre 
+    ldr r3, [r3] @@ contador de letras en nombre
+    
+    add r3, r3, #1
+
+    ldrb r4, [r2, #4]
+    cmp r4, #Null
+    bne comparadorv2_1
+
+    ldr r5, =letrasnombre
+    str r3, [r5]
+    
     bx lr
+
+    comparadorv2_2: @@ encuentra la cantidad de letras en nombre
+    ldr r2, =lastname
+    ldr r2, [r2] @@ cadena de texto del nombre
+    ldr r3, =letrasapellido 
+    ldr r3, [r3] @@ contador de letras en nombre
+    
+    add r3, r3, #1
+
+    ldrb r4, [r2, #4]
+    cmp r4, #Null
+    bne comparadorv2_1
+
+    ldr r5, =letrasapellido
+    str r3, [r5]
+    
+    bx lr
+
+
+
+
 
     comparador2: @@ encuentra la cantidad de letras en Apellido
     ldr r2, =lastname
@@ -105,13 +127,24 @@ main:
     ldrb r3, [r2]
     cmp r3, #0
     bne comparador2
-    str r3, =ultimaLetraApellido
+
+    @@ guardar en la variable
+    ldr r4, =vocalesapellido
+    str r3, [r4]
+
+
+    ldr r4, =ultimaLetraApellido
+
     bx lr
     
     comparador3: @@ encuentra la cantidad de vocales en Nombre
     ldr r2, =name
+    ldr r2, [r2] @@ cadena de texto del nombre
     ldr r3, =vocalesnombre
-    add r2, r2, r3
+    ldr r3, [r3] @@ contador de vocales en nombre
+
+    @@add r2, r2, r3
+    
     ldrb r3, [r2]
     cmp r3, #'a'
     addeq r5, r5, #1 @@ si es vocal
@@ -133,18 +166,25 @@ main:
     addeq r5, r5, #1
     cmp r3, #'U'
     addeq r5, r5, #1
-    cmp r3, #' '
+    cmp r3, #Null'
+    add r3, r3, #4
+
     bne comparador3
 
-    
 
+
+    ldr r4, =vocalesnombre
+    str r3, [r4]
 
     bx lr
 
     comparador4: @@ encuentra la cantidad de vocales en Apellido
     ldr r2, =lastname
+    ldr r2, [r2] @@ cadena de texto del nombre
     ldr r3, =vocalesapellido
-    add r2, r2, r3
+    ldr r3, [r3] @@ contador de vocales en nombre
+
+    @@add r2, r2, r3
     ldrb r3, [r2]
     cmp r3, #'a'
     addeq r9, r9, #1
@@ -166,8 +206,16 @@ main:
     addeq r9, r9, #1
     cmp r3, #'U'
     addeq r9, r9, #1
-    cmp r3, #' '
+    cmp r3, #Null'
+    add r3, r3, #4
     bne comparador4
+
+
+
+    ldr r4, =vocalesapellido
+    str r3, [r4]
+
+
     bx lr
 
 puntuador:
