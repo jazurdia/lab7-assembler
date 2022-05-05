@@ -115,23 +115,6 @@ main:
     str r3, [r5]
     
     bx lr
-
-    comparador2: @@ encuentra la cantidad de letras en Apellido
-    ldr r2, =lastname
-    ldr r3, =letrasapellido
-    add r2, r2, r3
-    ldrb r3, [r2]
-    cmp r3, #0
-    bne comparador2
-
-    @@ guardar en la variable
-    ldr r4, =vocalesapellido
-    str r3, [r4]
-
-
-    ldr r4, =ultimaLetraApellido
-
-    bx lr
     
     comparador3: @@ encuentra la cantidad de vocales en Nombre
     ldr r2, =name
@@ -162,9 +145,9 @@ main:
     addeq r5, r5, #1
     cmp r3, #'U'
     addeq r5, r5, #1
-    cmp r3, #Null'
+    
     add r3, r3, #4
-
+    cmp r3, #Null
     bne comparador3
 
 
@@ -202,7 +185,7 @@ main:
     addeq r9, r9, #1
     cmp r3, #'U'
     addeq r9, r9, #1
-    cmp r3, #Null'
+    cmp r3, #Null
     add r3, r3, #4
     bne comparador4
 
